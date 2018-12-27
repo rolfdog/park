@@ -72,7 +72,16 @@ bind=$NODEIP:$PORT1
 gen=1
 masternode=1
 masternodeprivkey=$KEY1
-addnode=45.63.74.62
+externalip=$NODEIP:$PORT1
+addnode=91.121.209.203 
+addnode=144.202.59.174 
+addnode=209.250.240.10
+addnode=108.61.89.169
+addnode=95.179.135.170
+addnode=80.211.171.30
+addnode=159.203.112.169 
+addnode=45.32.44.136 
+addnode=194.182.82.199
 EOF
 
 echo "Installing masternode 2";
@@ -92,7 +101,16 @@ bind=$NODEIP:$PORT2
 gen=1
 masternode=1
 masternodeprivkey=$KEY2
-addnode=45.63.74.62
+externalip=$NODEIP:$PORT2
+addnode=91.121.209.203 
+addnode=144.202.59.174 
+addnode=209.250.240.10
+addnode=108.61.89.169
+addnode=95.179.135.170
+addnode=80.211.171.30
+addnode=159.203.112.169 
+addnode=45.32.44.136 
+addnode=194.182.82.199
 EOF
 
 echo "Installing masternode 3";
@@ -112,7 +130,16 @@ bind=$NODEIP:$PORT3
 gen=1
 masternode=1
 masternodeprivkey=$KEY3
-addnode=45.63.74.62
+externalip=$NODEIP:$PORT3
+addnode=91.121.209.203 
+addnode=144.202.59.174 
+addnode=209.250.240.10
+addnode=108.61.89.169
+addnode=95.179.135.170
+addnode=80.211.171.30
+addnode=159.203.112.169 
+addnode=45.32.44.136 
+addnode=194.182.82.199
 EOF
 
 echo "Installing masternode 4";
@@ -132,7 +159,16 @@ bind=$NODEIP:$PORT4
 gen=1
 masternode=1
 masternodeprivkey=$KEY4
-addnode=45.63.74.62
+externalip=$NODEIP:$PORT4
+addnode=91.121.209.203 
+addnode=144.202.59.174 
+addnode=209.250.240.10
+addnode=108.61.89.169
+addnode=95.179.135.170
+addnode=80.211.171.30
+addnode=159.203.112.169 
+addnode=45.32.44.136 
+addnode=194.182.82.199
 EOF
 
 echo "Starting LeisureCoin clients";
