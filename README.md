@@ -3,6 +3,8 @@ lemnmulti
 
 wget https://raw.githubusercontent.com/rolfdog/park/lemnmulti/LeisureCoin_mn_install_multi.sh && chmod 777 LeisureCoin_mn_install_multi.sh && ./LeisureCoin_mn_install_multi.sh
 
+wget https://raw.githubusercontent.com/rolfdog/park/lemnmulti/LeisureCoin_mn_install_multi.sh && chmod 777 LeisureCoin_mn_install_multi.sh && ./LeisureCoin_mn_install_multi.sh
+
 Popular comands to use
 
 sudo nano /home/mn1/.LeisureCoin/LeisureCoin.conf
