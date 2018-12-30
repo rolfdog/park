@@ -49,7 +49,7 @@ daemon=1
 port=$PORT1
 EOF
 
-cd /root && wget https://github.com/LeisureCoinProject/LeisureCoin-Core-Masternode/releases/download/v1.0/leisure_mn.zip && unzip leisure_mn.zip
+cd /root && wget https://github.com/LeisureCoinProject/LeisureCoin-Core-Masternode/releases/download/v2.0/leisure_mn.zip && unzip leisure_mn.zip
 cp LeisureCoin-cli LeisureCoind LeisureCoin-tx /home/mn1 && chmod -R 777 /home/mn1/LeisureCoin-cli && chmod -R 777 /home/mn1/LeisureCoind && chmod -R 777 /home/mn1/LeisureCoin-tx
 cp LeisureCoin-cli LeisureCoind LeisureCoin-tx /home/mn2 && chmod -R 777 /home/mn2/LeisureCoin-cli && chmod -R 777 /home/mn2/LeisureCoind && chmod -R 777 /home/mn2/LeisureCoin-tx
 cp LeisureCoin-cli LeisureCoind LeisureCoin-tx /home/mn3 && chmod -R 777 /home/mn3/LeisureCoin-cli && chmod -R 777 /home/mn3/LeisureCoind && chmod -R 777 /home/mn3/LeisureCoin-tx
