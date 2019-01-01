@@ -47,6 +47,7 @@ listen=1
 server=1
 daemon=1
 port=$PORT1
+
 EOF
 
 cd /root && wget https://github.com/LeisureCoinProject/LeisureCoin-Core/releases/download/1.1.0.3/LeisureCoin-Linux64bit-qt.zip && unzip leisure_mn.zip
@@ -82,6 +83,7 @@ addnode=80.211.171.30
 addnode=159.203.112.169 
 addnode=45.32.44.136 
 addnode=194.182.82.199
+
 EOF
 
 echo "Installing masternode 2";
@@ -111,6 +113,7 @@ addnode=80.211.171.30
 addnode=159.203.112.169 
 addnode=45.32.44.136 
 addnode=194.182.82.199
+
 EOF
 
 echo "Installing masternode 3";
@@ -140,6 +143,7 @@ addnode=80.211.171.30
 addnode=159.203.112.169 
 addnode=45.32.44.136 
 addnode=194.182.82.199
+
 EOF
 
 echo "Installing masternode 4";
@@ -169,6 +173,7 @@ addnode=80.211.171.30
 addnode=159.203.112.169 
 addnode=45.32.44.136 
 addnode=194.182.82.199
+
 EOF
 
 echo "Starting LeisureCoin clients";
@@ -183,6 +188,7 @@ su - mn2 -c './LeisureCoind'
 su - mn3 -c './LeisureCoind'
 su - mn4 -c './LeisureCoind'
 sleep 5
+
 echo "
 
 *** Your LeisureCoin masternodes are now installed. Please wait for the wallets to be fully synced. ***
