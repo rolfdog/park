@@ -4,8 +4,6 @@ add-apt-repository ppa:bitcoin/bitcoin && apt-get -y update && apt-get -y instal
 
 echo "Done installing";
 
-echo "Setting up swap space";
-
 dd if=/dev/zero of=/swapfile bs=1M count=4096 && chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile && echo "/swapfile none swap defaults 0 0" >> /etc/fstab
 
 echo "Setting up user accounts";
