@@ -72,14 +72,14 @@ gen=1
 masternode=1
 masternodeprivkey=$KEY1
 externalip=$NODEIP:$PORT1
-addnode=91.121.209.203 
-addnode=144.202.59.174 
+addnode=91.121.209.203
+addnode=144.202.59.174
 addnode=209.250.240.10
 addnode=108.61.89.169
 addnode=95.179.135.170
 addnode=80.211.171.30
-addnode=159.203.112.169 
-addnode=45.32.44.136 
+addnode=159.203.112.169
+addnode=45.32.44.136
 addnode=194.182.82.199
 
 EOF
@@ -102,14 +102,14 @@ gen=1
 masternode=1
 masternodeprivkey=$KEY2
 externalip=$NODEIP:$PORT2
-addnode=91.121.209.203 
-addnode=144.202.59.174 
+addnode=91.121.209.203
+addnode=144.202.59.174
 addnode=209.250.240.10
 addnode=108.61.89.169
 addnode=95.179.135.170
 addnode=80.211.171.30
-addnode=159.203.112.169 
-addnode=45.32.44.136 
+addnode=159.203.112.169
+addnode=45.32.44.136
 addnode=194.182.82.199
 
 EOF
@@ -132,14 +132,14 @@ gen=1
 masternode=1
 masternodeprivkey=$KEY3
 externalip=$NODEIP:$PORT3
-addnode=91.121.209.203 
-addnode=144.202.59.174 
+addnode=91.121.209.203
+addnode=144.202.59.174
 addnode=209.250.240.10
 addnode=108.61.89.169
 addnode=95.179.135.170
 addnode=80.211.171.30
-addnode=159.203.112.169 
-addnode=45.32.44.136 
+addnode=159.203.112.169
+addnode=45.32.44.136
 addnode=194.182.82.199
 
 EOF
@@ -162,14 +162,14 @@ gen=1
 masternode=1
 masternodeprivkey=$KEY4
 externalip=$NODEIP:$PORT4
-addnode=91.121.209.203 
-addnode=144.202.59.174 
+addnode=91.121.209.203
+addnode=144.202.59.174
 addnode=209.250.240.10
 addnode=108.61.89.169
 addnode=95.179.135.170
 addnode=80.211.171.30
-addnode=159.203.112.169 
-addnode=45.32.44.136 
+addnode=159.203.112.169
+addnode=45.32.44.136
 addnode=194.182.82.199
 
 EOF
@@ -212,7 +212,7 @@ Masternode 4: MN4 $NODEIP:$PORT4 $KEY4 txid index
 Masternode 1: su - mn1 -c './LeisureCoin-cli masternode status'
 Masternode 2: su - mn2 -c './LeisureCoin-cli masternode status'
 Masternode 3: su - mn3 -c './LeisureCoin-cli masternode status'
-Masternode 4: su - mn4 -c './LeisureCoin-cli masternode status' 
+Masternode 4: su - mn4 -c './LeisureCoin-cli masternode status'
 
 ***";
 
