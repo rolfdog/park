@@ -1,0 +1,189 @@
+SPINNER="/-\\|"
+
+# Only run if root.
+if [[ "$(whoami)" != "root" ]]; then
+  echo "Script must be run as user: root"
+  echo "To switch to the root user type"
+  echo
+  echo "sudo su"
+  echo
+  echo "And then re-run this command."
+  exit -1
+fi
+
+prettyPrint() {
+  local LABEL=$1
+  local VALUE=$2
+  local HINT=$3
+  echo -n -e "${LABEL}"
+  if [[ $(echo -n "${LABEL}" | wc -m) -lt 7 ]]; then
+    echo -n -e "\t\t"
+  elif [[ $(echo -n "${LABEL}" | wc -m) -lt 15 ]]; then
+    echo -n -e "\t"
+  fi
+  echo -n -e "\t\\e[1;3m${VALUE}\\e[0m"
+  if [[ "${HINT}" != "" ]]; then
+    echo -n -e " \t\\e[2m(${HINT})\\e[0m"
+  fi
+  echo
+}
+
+prettySection() {
+  printf "\\n\\e[42;1m***    %-40s    ***\\e[0m\\n" "$1"
+}
+
+waitOnProgram() {
+  local MESSAGE=$1
+  local PID=$!
+  local i=1
+  while [[ -d /proc/$PID ]]; do
+    printf "\\r${SPINNER:i++%${#SPINNER}:1} ${MESSAGE}"
+    sleep 0.3
+  done
+  echo
+}
+
+prettySection "Step 1: System Validation"
+PUBLIC_IP="$(curl ipinfo.io/ip)"
+
+# Check for Ubuntu
+if [[ -f /etc/os-release ]]; then
+  . /etc/os-release
+  OS=${NAME}
+  VER=${VERSION_ID}
+elif type lsb_release >/dev/null 2>&1; then
+  OS=$(lsb_release -si)
+  VER=$(lsb_release -sr)
+elif [[ -f /etc/lsb-release ]]; then
+  . /etc/lsb-release
+  OS=${DISTRIB_ID}
+  VER=${DISTRIB_RELEASE}
+elif [[ -f /etc/debian_version ]]; then
+  OS=Debian
+  VER=$(cat /etc/debian_version)
+else
+  OS=$(uname -s)
+  VER=$(uname -r)
+fi
+
+if [[ "$OS" != "Ubuntu" ]]; then
+  cat /etc/*-release
+  echo
+  echo "Are you using Ubuntu 16.04 or higher?"
+  exit 1
+fi
+
+TARGET='16.03'
+if [[ ${VER%.*} -eq ${TARGET%.*} ]] && [[ ${VER#*.} > ${TARGET#*.} ]] || [[ ${VER%.*} -gt ${TARGET%.*} ]]; then
+  :
+else
+  cat /etc/*-release
+  echo
+  echo "Are you using Ubuntu 16.04 or higher?"
+  exit 1
+fi
+
+FREE_SPACE=$(df -P . | tail -1 | awk '{print $4}')
+if [[ ${FREE_SPACE} -lt 2097152 ]]; then
+  echo "${FREE_SPACE} bytes of free disk space found. Need at least 2Gb of free space to proceed"
+  exit 1
+fi
+
+if [[ ! -f /swapfile  ]]; then
+  fallocate -l 256M /swapfile
+  chmod 600 /swapfile
+  mkswap /swapfile
+  swapon /swapfile
+  echo "/swapfile none swap defaults 0 0" >> /etc/fstab
+fi
+
+echo -e "\\e[0m"
+
+prettySection "Step 2: Installing Dependencies"
+apt install -y ufw docker.io
+
+prettySection "Step 3: Configuring Firewall"
+ufw limit 22
+echo "y" | ufw enable
+ufw reload
+
+docker pull mninstall/cspn &
+waitOnProgram "Pulling down latest LSR image"
+
+prettySection "Step 5: Masternode Installation"
+instance=1
+while :; do
+  MNINSTALL_PORT=$((9333+instance))
+  MNINSTALL_NAME="lsr-mn${instance}"
+
+  CONTAINER=$(docker run -d -v  "${HOME}/${MNINSTALL_NAME}:/config" -p ${MNINSTALL_PORT}:9333 \--name "${MNINSTALL_NAME}" mninstall/lsr 2>&1)
+  if [[ $(echo "${CONTAINER}" | grep "Error response from daemon" | wc -c) -eq 0 ]]; then
+    ufw allow "${MNINSTALL_PORT}"
+    break
+  else
+    instance=$((instance+1))
+    printf "\\r${SPINNER:instance%${#SPINNER}:1} Searching for usable port ..."
+    sleep 0.3
+  fi
+done
+
+cat - > "/usr/local/bin/${MNINSTALL_NAME}" << EOF
+case "\$1" in
+start)
+  docker start ${MNINSTALL_NAME}
+  ;;
+upgrade)
+  docker pull mninstall/lsr
+  docker exec ${MNINSTALL_NAME} lsr-cli stop
+  docker stop ${MNINSTALL_NAME}
+  docker rm ${MNINSTALL_NAME}
+  docker run -d -v "${HOME}/${MNINSTALL_NAME}:/config" -p ${MNINSTALL_PORT}:9333 --name "${MNINSTALL_NAME}" mninstall/lsr
+  ;;
+uninstall)
+  echo "This will permanently remove the masternode installation and purge all files including the wallet."
+  read -r -p "Are you sure [y/N]? " CHOICE
+  if [[ "\${CHOICE,,}" == "y" ]]; then
+    cd ${HOME}
+    if [[ -f "${MNINSTALL_NAME}.tar.gz" ]]; then
+      echo "Failure: Existing backup archive detected at ${MNINSTALL_NAME}.tar.gz. Delete before trying again"
+      exit 1
+    else
+      echo "Uninstalling ${MNINSTALL_NAME}"
+      docker exec ${MNINSTALL_NAME} csports-cli stop
+      docker stop ${MNINSTALL_NAME}
+      docker rm ${MNINSTALL_NAME}
+      ufw delete allow ${MNINSTALL_PORT}
+      tar cfz "${MNINSTALL_NAME}.tar.gz" "${MNINSTALL_NAME}" || (echo "Failed to backup configurations. Exiting" && exit 1)
+      echo "Archived configurations as ${MNINSTALL_NAME}.tar.gz"
+      rm -rf "${MNINSTALL_NAME}"
+      rm "/usr/local/bin/${MNINSTALL_NAME}"
+    fi
+  else
+    echo "Uninstall aborted"
+  fi
+  ;;
+debug)
+  docker exec -it -w /root/.lsr ${MNINSTALL_NAME} /bin/bash
+  ;;
+*)
+  docker exec ${MNINSTALL_NAME} lsr-cli \$@
+  ;;
+esac
+EOF
+chmod 700 "/usr/local/bin/${MNINSTALL_NAME}"
+
+prettySection "Step 6: Installation Complete"
+sleep 60 &
+waitOnProgram "Waiting for 60 seconds to ensure everything started up correctly"
+KEY=$(cat ${HOME}/${MNINSTALL_NAME}/lsr.conf | grep masternodeprivkey | sed "s/masternodeprivkey=//")
+
+prettyPrint "Config" "${HOME}/${MNINSTALL_NAME}" "Backup this folder"
+prettyPrint " Alias" "${MNINSTALL_NAME}" "Name of masternode alias"
+prettyPrint "    IP" "${PUBLIC_IP}" "IP of this masternode instance"
+prettyPrint "  Port" "${MNINSTALL_PORT}" "Port number of this masternode instance"
+prettyPrint "   Key" "${KEY}" "Private key of this masternode instance"
+echo
+prettyPrint "masternode.conf" "" "Add the below to your local wallets masternode.conf"
+echo "${MNINSTALL_NAME} ${PUBLIC_IP}:${MNINSTALL_PORT} ${KEY} <txid> <txid index>"
+echo
+
