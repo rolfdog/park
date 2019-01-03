@@ -1,7 +1,7 @@
 # park
 lemnmulti
 
-wget https://github.com/rolfdog/park/blob/master/LeisureCoin_mn_install_multi.sh && chmod 777 LeisureCoin_mn_install_multi.sh && ./LeisureCoin_mn_install_multi.sh 
+wget https://github.com/rolfdog/park/blob/master/LeisureCoin_mn_install_multi.sh && chmod 777 LeisureCoin_mn_install_multi.sh && ./LeisureCoin_mn_install_multi.sh https://github.com/rolfdog/park/blob/master/LeisureCoin_mn_install_multi.sh 
 
 wget https://raw.githubusercontent.com/rolfdog/park/lemnmulti/patchmulti.sh && chmod 777 patchmulti.sh && ./patchmulti.sh
 
