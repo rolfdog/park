@@ -76,26 +76,26 @@ To limit cpu usage you need to run cpu limits on each mn instance Type
 
 take note and edit each -p instance with that number in this format
 
-MN1+ copy paste instruction below edit -p to coraspond with the program idenity number associated with MN1
+MN1+ copy paste instruction below 
 
 cpulimit -c 2 -P /home/mn1/LeisureCoind -l 20 -b
 
 CTRL+C
 
-MN2+ copy paste instruction below edit -p to coraspond with the program idenity number associated with MN2
+MN2+ copy paste instruction below 
 
 cpulimit -c 2 -P /home/mn2/LeisureCoind -l 20 -b
 
 
 CTRL+C
 
-MN3+ copy paste instruction below edit -p to coraspond with the program idenity number associated with MN3
+MN3+ copy paste instruction below 
 
 cpulimit -c 2 -P /home/mn3/LeisureCoind -l 20 -b
 
 CTRL+C
 
-MN2+ copy paste instruction below edit -p to coraspond with the program idenity number associated with MN4
+MN4+ copy paste instruction below 
 
 cpulimit -c 2 -P /home/mn4/LeisureCoind -l 20 -b
 
