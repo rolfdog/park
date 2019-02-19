@@ -1,9 +1,29 @@
 # park
 lemnmulti
 
-wget https://github.com/rolfdog/park/blob/master/LeisureCoin_mn_install_multi.sh && chmod 777 LeisureCoin_mn_install_multi.sh && ./LeisureCoin_mn_install_multi.sh https://github.com/rolfdog/park/blob/master/LeisureCoin_mn_install_multi.sh 
+apt-get update
 
-wget https://raw.githubusercontent.com/rolfdog/park/lemnmulti/patchmulti.sh && chmod 777 patchmulti.sh && ./patchmulti.sh
+apt-get update -y
+
+apt-get install cpulimit
+
+cat > LSR-multi-mn.sh
+
+CTRL+C
+
+nano LSR-multi-mn.sh
+
+Copy paste the script in to the document 
+
+CTRL+X
+
+y
+
+Enter
+
+sudo chmod 777 -R *
+
+sh LSR-multi-mn.sh
 
 Popular comands to use
 
@@ -47,9 +67,6 @@ su - mn3 -c './LeisureCoind -reindex'
 
 su - mn4 -c './LeisureCoind -reindex'
 
-apt-get update
-
-apt-get install cpulimit
 
 To limit cpu usage you need to run cpu limits on each mn instance Type
 
@@ -61,25 +78,26 @@ take note and edit each -p instance with that number in this format
 
 MN1+ copy paste instruction below edit -p to coraspond with the program idenity number associated with MN1
 
-cpulimit -c 2 -p 12345 -l 20 -b
+cpulimit -c 2 -P /home/mn1/LeisureCoind -l 20 -b
 
 CTRL+C
 
 MN2+ copy paste instruction below edit -p to coraspond with the program idenity number associated with MN2
 
-cpulimit -c 2 -p 12346 -l 20 -b
+cpulimit -c 2 -P /home/mn2/LeisureCoind -l 20 -b
+
 
 CTRL+C
 
 MN3+ copy paste instruction below edit -p to coraspond with the program idenity number associated with MN3
 
-cpulimit -c 2 -p 12347 -l 20 -b
+cpulimit -c 2 -P /home/mn3/LeisureCoind -l 20 -b
 
 CTRL+C
 
-MN2+ copy paste instruction below edit -p to coraspond with the program idenity number associated with MN2
+MN2+ copy paste instruction below edit -p to coraspond with the program idenity number associated with MN4
 
-cpulimit -c 2 -p 12348 -l 20 -b
+cpulimit -c 2 -P /home/mn4/LeisureCoind -l 20 -b
 
 CTRL+C
 
