@@ -13,7 +13,7 @@ CTRL+C
 
 nano LSR-multi-mn.sh
 
-Copy paste the script in to the document 
+Copy paste the script in to the document located here https://github.com/rolfdog/park/blob/master/LeisureCoin_mn_install_multi.sh
 
 CTRL+X
 
