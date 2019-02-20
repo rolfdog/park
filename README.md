@@ -72,9 +72,8 @@ To limit cpu usage you need to run cpu limits on each mn instance Type
 
 "Top" to see mn running then hit key combination 
 
-"CTRL+C" to exit Top on the right hand side you will see your program identity number 
+"CTRL+C" to exit Top 
 
-take note and edit each -p instance with that number in this format
 
 MN1+ copy paste instruction below 
 
