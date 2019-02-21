@@ -35,6 +35,10 @@ sudo nano /home/mn3/.LeisureCoin/LeisureCoin.conf
 
 sudo nano /home/mn4/.LeisureCoin/LeisureCoin.conf 
 
+sudo nano /home/mn5/.LeisureCoin/LeisureCoin.conf 
+
+sudo nano /home/mn6/.LeisureCoin/LeisureCoin.conf 
+
 su - mn1 -c './LeisureCoin-cli stop'
 
 su - mn2 -c './LeisureCoin-cli stop' 
@@ -42,6 +46,10 @@ su - mn2 -c './LeisureCoin-cli stop'
 su - mn3 -c './LeisureCoin-cli stop'  
 
 su - mn4 -c './LeisureCoin-cli stop'
+
+su - mn5 -c './LeisureCoin-cli stop'
+
+su - mn6 -c './LeisureCoin-cli stop'
 
 su - mn1 -c './LeisureCoind -daemon'  
 
@@ -51,6 +59,10 @@ su - mn3 -c './LeisureCoind -daemon'
 
 su - mn4 -c './LeisureCoind -daemon'
 
+su - mn5 -c './LeisureCoind -daemon'
+
+su - mn6 -c './LeisureCoind -daemon'
+
 su - mn1 -c './LeisureCoin-cli masternode status'
 
 su - mn2 -c './LeisureCoin-cli masternode status'
@@ -58,6 +70,10 @@ su - mn2 -c './LeisureCoin-cli masternode status'
 su - mn3 -c './LeisureCoin-cli masternode status'
 
 su - mn4 -c './LeisureCoin-cli masternode status'
+
+su - mn5 -c './LeisureCoin-cli masternode status'
+
+su - mn6 -c './LeisureCoin-cli masternode status'
 
 su - mn1 -c './LeisureCoind -reindex' 
 
@@ -67,6 +83,9 @@ su - mn3 -c './LeisureCoind -reindex'
 
 su - mn4 -c './LeisureCoind -reindex'
 
+su - mn5 -c './LeisureCoind -reindex'
+
+su - mn6 -c './LeisureCoind -reindex'
 
 To limit cpu usage you need to run cpu limits on each mn instance Type
 
@@ -99,5 +118,15 @@ MN4+ copy paste instruction below
 cpulimit -c 2 -P /home/mn4/LeisureCoind -l 20 -b
 
 CTRL+C
+
+MN5+ copy paste instruction below 
+
+cpulimit -c 2 -P /home/mn5/LeisureCoind -l 20 -b
+
+CTRL+C
+
+MN6+ copy paste instruction below 
+
+cpulimit -c 2 -P /home/mn6/LeisureCoind -l 20 -b
 
 Then type "Top" Note that the cpu limited to 20% for each mn instance  
