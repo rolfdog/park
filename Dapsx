@@ -210,10 +210,10 @@ EOF
 echo "Starting Dapsx clients";
 cd /root
 rm Dapsx_multi.sh
-rm LeisureCoind
-rm LeisureCoin-cli
-rm LeisureCoin-tx
-rm leisure_mn.zip
+rm DapsxCoind
+rm DapsxCoin-cli
+rm DapsxCoin-tx
+rm Dapsx_mn.zip
 su - mn1 -c './DapsxCoind'
 su - mn2 -c './DapsxCoind'
 su - mn3 -c './DapsxCoind'
