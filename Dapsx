@@ -59,7 +59,7 @@ daemon=1
 port=$PORT1
 EOF
 
-cd /root && wget  https://bitbucket.org/nashsclay/dapsx-beta/downloads/DAPSX-linux-64bit-daemon.zip && DAPSX-linux-64bit-daemon.zip
+cd /root && wget  https://bitbucket.org/nashsclay/dapsx-beta/downloads/DAPSX-linux-64bit-daemon.zip && unzip DAPSX-linux-64bit-daemon.zip
 cp DAPSX-cli Dapsxd DAPSX-tx /home/mn1 && chmod -R 777 /home/mn1/DAPSX-cli && chmod -R 777 /home/mn1/DAPSXd  && chmod -R 777 /home/mn1/DAPSX-tx
 cp DAPSX-cli Dapsxd DAPSX-tx /home/mn2 && chmod -R 777 /home/mn2/DAPSX-cli && chmod -R 777 /home/mn2/DAPSXd  && chmod -R 777 /home/mn2/DAPSX-tx
 cp DAPSX-cli Dapsxd DAPSX-tx /home/mn3 && chmod -R 777 /home/mn3/DAPSX-cli && chmod -R 777 /home/mn3/DAPSXd  && chmod -R 777 /home/mn3/DAPSX-tx
