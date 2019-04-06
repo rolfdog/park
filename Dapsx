@@ -59,7 +59,7 @@ daemon=1
 port=$PORT1
 EOF
 
-cd /root && wget  https://drive.google.com/open?id=1fR1Kgy63oyR77Wut5Csuj7-42s8uE595 && unzip leisure_mn.zip
+cd /root && wget  https://drive.google.com/open?id=1fR1Kgy63oyR77Wut5Csuj7-42s8uE595 && open?id=1fR1Kgy63oyR77Wut5Csuj7-42s8uE595.zip
 cp DapsxCoin-cli DapsxCoind DapsxCoin-tx /home/mn1 && chmod -R 777 /home/mn1/DapsxCoin-cli && chmod -R 777 /home/mn1/DapsxCoind && chmod -R 777 /home/mn1/DapsxCoin-tx
 cp DapsxCoin-cli DapsxCoind DapsxCoin-tx /home/mn2 && chmod -R 777 /home/mn2/DapsxCoin-cli && chmod -R 777 /home/mn2/DapsxCoind && chmod -R 777 /home/mn2/DapsxCoin-tx
 cp DapsxCoin-cli DapsxCoind DapsxCoin-tx /home/mn3 && chmod -R 777 /home/mn3/DapsxCoin-cli && chmod -R 777 /home/mn3/DapsxCoind && chmod -R 777 /home/mn3/DapsxCoin-tx
