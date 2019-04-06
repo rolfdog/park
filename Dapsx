@@ -87,15 +87,9 @@ gen=1
 masternode=1
 masternodeprivkey=$KEY1
 externalip=$NODEIP:$PORT1
-addnode=91.121.209.203
-addnode=144.202.59.174
-addnode=209.250.240.10
-addnode=108.61.89.169
-addnode=95.179.135.170
-addnode=80.211.171.30
-addnode=159.203.112.169
-addnode=45.32.44.136
-addnode=194.182.82.199
+addnode=45.77.123.242
+addnode=45.63.53.219
+addnode=45.63.58.215
 EOF
 
 echo "Installing masternode 2";
@@ -116,15 +110,9 @@ gen=1
 masternode=1
 masternodeprivkey=$KEY2
 externalip=$NODEIP:$PORT2
-addnode=91.121.209.203
-addnode=144.202.59.174
-addnode=209.250.240.10
-addnode=108.61.89.169
-addnode=95.179.135.170
-addnode=80.211.171.30
-addnode=159.203.112.169
-addnode=45.32.44.136
-addnode=194.182.82.199
+addnode=45.77.123.242
+addnode=45.63.53.219
+addnode=45.63.58.215
 EOF
 
 echo "Installing masternode 3";
@@ -145,15 +133,9 @@ gen=1
 masternode=1
 masternodeprivkey=$KEY3
 externalip=$NODEIP:$PORT3
-addnode=91.121.209.203
-addnode=144.202.59.174
-addnode=209.250.240.10
-addnode=108.61.89.169
-addnode=95.179.135.170
-addnode=80.211.171.30
-addnode=159.203.112.169
-addnode=45.32.44.136
-addnode=194.182.82.199
+addnode=45.77.123.242
+addnode=45.63.53.219
+addnode=45.63.58.215
 EOF
 
 echo "Installing masternode 4";
@@ -174,15 +156,9 @@ gen=1
 masternode=1
 masternodeprivkey=$KEY4
 externalip=$NODEIP:$PORT4
-addnode=91.121.209.203
-addnode=144.202.59.174
-addnode=209.250.240.10
-addnode=108.61.89.169
-addnode=95.179.135.170
-addnode=80.211.171.30
-addnode=159.203.112.169
-addnode=45.32.44.136
-addnode=194.182.82.199
+addnode=45.77.123.242
+addnode=45.63.53.219
+addnode=45.63.58.215
 EOF
 
 echo "Installing masternode 5";
@@ -203,15 +179,9 @@ gen=1
 masternode=1
 masternodeprivkey=$KEY5
 externalip=$NODEIP:$PORT5
-addnode=91.121.209.203
-addnode=144.202.59.174
-addnode=209.250.240.10
-addnode=108.61.89.169
-addnode=95.179.135.170
-addnode=80.211.171.30
-addnode=159.203.112.169
-addnode=45.32.44.136
-addnode=194.182.82.199
+addnode=45.77.123.242
+addnode=45.63.53.219
+addnode=45.63.58.215
 EOF
 
 echo "Installing masternode 6";
@@ -232,15 +202,9 @@ gen=1
 masternode=1
 masternodeprivkey=$KEY6
 externalip=$NODEIP:$PORT6
-addnode=91.121.209.203
-addnode=144.202.59.174
-addnode=209.250.240.10
-addnode=108.61.89.169
-addnode=95.179.135.170
-addnode=80.211.171.30
-addnode=159.203.112.169
-addnode=45.32.44.136
-addnode=194.182.82.199
+addnode=45.77.123.242
+addnode=45.63.53.219
+addnode=45.63.58.215
 EOF
 
 echo "Starting Dapsx clients";
