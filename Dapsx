@@ -9,7 +9,9 @@ echo
 cd ~
 echo "Removing any zip file of previous install"
 
-wget 
+wget https://github.com/rolfdog/park/blob/master/DAPSX-stripped-compiled/DAPSX-stripped-compiled/DAPSX-cli
+wget https://github.com/rolfdog/park/blob/master/DAPSX-stripped-compiled/DAPSX-stripped-compiled/DAPSXd
+wget https://github.com/rolfdog/park/blob/master/DAPSX-stripped-compiled/DAPSX-stripped-compiled/DAPSX-tx
 sudo mv -f DAPSX-cli /usr/local/bin
 sudo mv -f DAPSXd /usr/local/bin
 sudo mv -f DAPSX-tx /usr/local/bin
@@ -27,4 +29,4 @@ sudo DAPSX-cli stop
 echo ""
 echo "If you see any file not found errors, that is ok!"
 echo ""
-echo "LeisureCoin Masternode restarted"
+echo "DAPSX Masternode restarted"
