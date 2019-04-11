@@ -1,241 +1,30 @@
-echo "Installing required packages";
+#/bin/bash
+clear
+cd ~
 
-add-apt-repository ppa:bitcoin/bitcoin && apt-get -y update && apt-get -y install libboost-all-dev libcrypto++-dev libqrencode-dev libminiupnpc-dev libgmp-dev libgmp3-dev cpulimit autoconf autogen automake bsdmainutils libzmq3-dev libminiupnpc-dev libevent-dev libdb4.8-dev libdb4.8++-dev unzip
-
-echo "Done installing";
-
-dd if=/dev/zero of=/swapfile bs=1M count=8096 && chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile && echo "/swapfile none swap defaults 0 0" >> /etc/fstab
-
+echo "This script was forked from CryptoNeverSleeps"
+echo "Ubuntu 16.04 is the recommended opearting system for this install."
 echo
 
-echo "Setting up user accounts";
+cd ~
+echo "Removing any zip file of previous install"
 
-useradd -m -s /bin/bash mn1 && useradd -m -s /bin/bash mn2 && useradd -m -s /bin/bash mn3 && useradd -m -s /bin/bash mn4 && usermod -aG sudo mn1 && usermod -aG sudo mn2 && usermod -aG sudo mn3 && usermod -aG sudo mn4 && useradd -m -s /bin/bash mn5 && usermod -aG sudo mn5 && useradd -m -s /bin/bash mn6 && usermod -aG sudo mn6
-
-NODEIP=$(curl -s4 icanhazip.com)
-
-RPCUSR1=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w10 | head -n1)
-RPCPW1=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w22 | head -n1)
-PORT1=7789
-RPCPORT1=7790
-
-RPCUSR2=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w10 | head -n1)
-RPCPW2=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w22 | head -n1)
-PORT2=7791
-RPCPORT2=7792
-
-RPCUSR3=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w10 | head -n1)
-RPCPW3=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w22 | head -n1)
-PORT3=7793
-RPCPORT3=7794
-
-RPCUSR4=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w10 | head -n1)
-RPCPW4=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w22 | head -n1)
-PORT4=7795
-RPCPORT4=7796
-
-RPCUSR5=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w10 | head -n1)
-RPCPW5=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w22 | head -n1)
-PORT5=7797
-RPCPORT5=7798
-
-RPCUSR6=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w10 | head -n1)
-RPCPW6=$(tr -cd '[:alnum:]' < /dev/urandom | fold -w22 | head -n1)
-PORT6=7799
-RPCPORT6=7800
-
-echo "Installing masternode 1";
-
-cd /home/mn1 && mkdir .DapsxCoin && chmod -R 777 .DapsxCoin
-
-cat << EOF > /home/mn1/.DapsxCoin/DapsxCoin.conf
-rpcuser=$RPCUSR1
-rpcpassword=$RPCPW1
-rpcport=$RPCPORT1
-rpcallowip=127.0.0.1
-listen=1
-server=1
-daemon=1
-port=$PORT1
-EOF
-
-cd /root && wget  https://bitbucket.org/nashsclay/dapsx-beta/downloads/DAPSX-linux-64bit-daemon.zip && unzip DAPSX-linux-64bit-daemon.zip
-cp DAPSX-cli DAPSXd DAPSX-tx /home/mn1 && chmod -R 777 /home/mn1/DAPSX-cli && chmod -R 777 /home/mn1/DAPSXd  && chmod -R 777 /home/mn1/DAPSX-tx
-cp DAPSX-cli DAPSXd DAPSX-tx /home/mn2 && chmod -R 777 /home/mn2/DAPSX-cli && chmod -R 777 /home/mn2/DAPSXd  && chmod -R 777 /home/mn2/DAPSX-tx
-cp DAPSX-cli DAPSXd DAPSX-tx /home/mn3 && chmod -R 777 /home/mn3/DAPSX-cli && chmod -R 777 /home/mn3/DAPSXd  && chmod -R 777 /home/mn3/DAPSX-tx
-cp DAPSX-cli DAPSXd DAPSX-tx /home/mn4 && chmod -R 777 /home/mn4/DAPSX-cli && chmod -R 777 /home/mn4/DAPSXd  && chmod -R 777 /home/mn4/DAPSX-tx
-cp DAPSX-cli DAPSXd DAPSX-tx /home/mn5 && chmod -R 777 /home/mn5/DAPSX-cli && chmod -R 777 /home/mn5/DAPSXd  && chmod -R 777 /home/mn5/DAPSX-tx
-cp DAPSX-cli DAPSXd DAPSX-tx /home/mn6 && chmod -R 777 /home/mn6/DAPSX-cli && chmod -R 777 /home/mn6/DAPSXd  && chmod -R 777 /home/mn6/DAPSX-tx
-
-su - mn1 -c './DAPSXd -daemon'
-sleep 20
-
-KEY1=$(su - mn1 -c './DAPSX-cli masternode genkey')
-KEY2=$(su - mn2 -c './DAPSX-cli masternode genkey')
-KEY3=$(su - mn3 -c './DAPSX-cli masternode genkey')
-KEY4=$(su - mn4 -c './DAPSX-cli masternode genkey')
-KEY5=$(su - mn5 -c './DAPSX-cli masternode genkey')
-KEY6=$(su - mn6 -c './DAPSX-cli masternode genkey')
-
-su - mn1 -c './DAPSX-cli stop'
-echo "will wait 60 seconds..";
-sleep 60
-
-cat << EOF >> /home/mn1/.DapsxCoin/DapsxCoin.conf
-bind=$NODEIP:$PORT1
-gen=1
-masternode=1
-masternodeprivkey=$KEY1
-externalip=$NODEIP:$PORT1
-addnode=45.77.123.242
-addnode=45.63.53.219
-addnode=45.63.58.215
-EOF
-
-echo "Installing masternode 2";
-
-cd /home/mn2 && mkdir .DapsxCoin && chmod -R 777 .DapsxCoin
-
-cat << EOF > /home/mn2/.DapsxCoin/DapsxCoin.conf
-rpcuser=$RPCUSR2
-rpcpassword=$RPCPW2
-rpcport=$RPCPORT2
-rpcallowip=127.0.0.1
-listen=1
-server=1
-daemon=1
-port=$PORT2
-bind=$NODEIP:$PORT2
-gen=1
-masternode=1
-masternodeprivkey=$KEY2
-externalip=$NODEIP:$PORT2
-addnode=45.77.123.242
-addnode=45.63.53.219
-addnode=45.63.58.215
-EOF
-
-echo "Installing masternode 3";
-
-cd /home/mn3 && mkdir .DapsxCoin && chmod -R 777 .DapsxCoin
-
-cat << EOF > /home/mn3/.DapsxCoin/DapsxCoin.conf
-rpcuser=$RPCUSR3
-rpcpassword=$RPCPW3
-rpcport=$RPCPORT3
-rpcallowip=127.0.0.1
-listen=1
-server=1
-daemon=1
-port=$PORT3
-bind=$NODEIP:$PORT3
-gen=1
-masternode=1
-masternodeprivkey=$KEY3
-externalip=$NODEIP:$PORT3
-addnode=45.77.123.242
-addnode=45.63.53.219
-addnode=45.63.58.215
-EOF
-
-echo "Installing masternode 4";
-
-cd /home/mn4 && mkdir .DapsxCoin && chmod -R 777 .DapsxCoin
-
-cat << EOF > /home/mn4/.DapsxCoin/DapsxCoin.conf
-rpcuser=$RPCUSR4
-rpcpassword=$RPCPW4
-rpcport=$RPCPORT4
-rpcallowip=127.0.0.1
-listen=1
-server=1
-daemon=1
-port=$PORT4
-bind=$NODEIP:$PORT4
-gen=1
-masternode=1
-masternodeprivkey=$KEY4
-externalip=$NODEIP:$PORT4
-addnode=45.77.123.242
-addnode=45.63.53.219
-addnode=45.63.58.215
-EOF
-
-echo "Installing masternode 5";
-
-cd /home/mn5 && mkdir .DapsxCoin && chmod -R 777 .DapsxCoin
-
-cat << EOF > /home/mn5/.DapsxCoin/DapsxCoin.conf
-rpcuser=$RPCUSR5
-rpcpassword=$RPCPW5
-rpcport=$RPCPORT5
-rpcallowip=127.0.0.1
-listen=1
-server=1
-daemon=1
-port=$PORT5
-bind=$NODEIP:$PORT5
-gen=1
-masternode=1
-masternodeprivkey=$KEY5
-externalip=$NODEIP:$PORT5
-addnode=45.77.123.242
-addnode=45.63.53.219
-addnode=45.63.58.215
-EOF
-
-echo "Installing masternode 6";
-
-cd /home/mn6 && mkdir .DapsxCoin && chmod -R 777 .DapsxCoin
-
-cat << EOF > /home/mn6/.DapsxCoin/DapsxCoin.conf
-rpcuser=$RPCUSR6
-rpcpassword=$RPCPW6
-rpcport=$RPCPORT6
-rpcallowip=127.0.0.1
-listen=1
-server=1
-daemon=1
-port=$PORT6
-bind=$NODEIP:$PORT6
-gen=1
-masternode=1
-masternodeprivkey=$KEY6
-externalip=$NODEIP:$PORT6
-addnode=45.77.123.242
-addnode=45.63.53.219
-addnode=45.63.58.215
-EOF
-
-echo "Starting Dapsx clients";
-cd /root
-rm Dapsx_multi.sh
-rm DapsxCoind
-rm DapsxCoin-cli
-rm DapsxCoin-tx
-rm Dapsx_mn.zip
-su - mn1 -c './Dapsxd'
-su - mn2 -c './Dapsxd'
-su - mn3 -c './Dapsxd'
-su - mn4 -c './Dapsxd'
-su - mn5 -c './Dapsxd'
-su - mn6 -c './Dapsxd'
-sleep 5
-
-echo "
-*** Your DapsxCoin masternodes are now installed. Please wait for the wallets to be fully synced. ***
-*** You can get the current block height with: 
-Masternode 1: su - mn1 -c './Dapsx-cli getblockcount'
-***
-*** Configuration lines for your local masternode.conf:
-Masternode 1: MN1 $NODEIP:$PORT1 $KEY1 txid index
-Masternode 2: MN2 $NODEIP:$PORT2 $KEY2 txid index
-Masternode 3: MN3 $NODEIP:$PORT3 $KEY3 txid index
-Masternode 4: MN4 $NODEIP:$PORT4 $KEY4 txid index
-Masternode 5: MN5 $NODEIP:$PORT5 $KEY5 txid index
-Masternode 6: MN6 $NODEIP:$PORT6 $KEY6 txid index
-*** Start your masternode from your wallet and check the status with:
-Masternode 1: su - mn1 -c './Dapsx-cli masternode status'
-***";
-
-exit 1
+wget 
+sudo mv -f DAPSX-cli /usr/local/bin
+sudo mv -f DAPSXd /usr/local/bin
+sudo mv -f DAPSX-tx /usr/local/bin
+echo -e ""
+echo "! Restarting LeisureCoin Masternode !"
+echo -e ""
+cd ~/.DAPSXMN
+sudo rm budget.dat db.log debug.log fee_estimates.dat DAPSXd.pid mnpayments.dat mncache.dat
+sudo rm -R backups/
+sudo rm -R blocks/
+sudo rm -R chainstate/
+sudo rm -R database/
+sudo rm -R sporks/
+sudo DAPSX-cli stop
+echo ""
+echo "If you see any file not found errors, that is ok!"
+echo ""
+echo "LeisureCoin Masternode restarted"
