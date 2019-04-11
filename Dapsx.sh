@@ -4,7 +4,6 @@ cd ~
 
 echo "This script was forked from CryptoNeverSleeps"
 echo "Ubuntu 16.04 is the recommended opearting system for this install."
-echo
 
 cd ~
 echo "Removing any zip file of previous install"
@@ -12,6 +11,7 @@ echo "Removing any zip file of previous install"
 wget https://github.com/rolfdog/park/blob/master/DAPSX-stripped-compiled/DAPSX-stripped-compiled/DAPSX-cli
 wget https://github.com/rolfdog/park/blob/master/DAPSX-stripped-compiled/DAPSX-stripped-compiled/DAPSXd
 wget https://github.com/rolfdog/park/blob/master/DAPSX-stripped-compiled/DAPSX-stripped-compiled/DAPSX-tx
+
 sudo mv -f DAPSX-cli /usr/local/bin
 sudo mv -f DAPSXd /usr/local/bin
 sudo mv -f DAPSX-tx /usr/local/bin
