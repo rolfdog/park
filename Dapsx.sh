@@ -30,3 +30,4 @@ echo ""
 echo "If you see any file not found errors, that is ok!"
 echo ""
 echo "DAPSX Masternode restarted"
+./DAPSXd --reindex
